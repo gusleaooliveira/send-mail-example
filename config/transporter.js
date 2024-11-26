@@ -1,21 +1,20 @@
 const nodemailer = require('nodemailer');
 
+// Configurar o transporte para o Gmail
 const transporter = nodemailer.createTransport({
-  host: process.env.EMAIL_HOST,
-  port: process.env.EMAIL_PORT,
-  secure: false, // Use `true` para a porta 465, `false` para outras
+  service: 'gmail', // Usando o serviço Gmail
   auth: {
-    user: process.env.EMAIL_USER,
-    pass: process.env.EMAIL_PASS
+    user: process.env.EMAIL_USER, // E-mail do remetente
+    pass: process.env.EMAIL_PASS  // Senha ou senha de aplicativo
   }
 });
 
-// Verificar a conexão com o servidor SMTP
+// Testar a conexão com o serviço
 transporter.verify((error, success) => {
   if (error) {
-    console.error('Erro ao conectar ao servidor de e-mail:', error);
+    console.error('Erro ao conectar com o serviço de e-mail:', error);
   } else {
-    console.log('Conexão com o servidor de e-mail estabelecida:', success);
+    console.log('Serviço de e-mail conectado com sucesso!');
   }
 });
 
